@@ -21,13 +21,7 @@
             <a class="nav-link active" aria-current="page" href="/proyecto_uno/"><i class="bi bi-house"> INICIO</i></a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/clientes"><i class="bi bi-person"> CLIENTES</i></a>
-          </li>
-          <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/productos"><i class="bi bi-archive"> PRODUCTOS</i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/proyecto_uno/ventas"><i class="bi bi-cart-dash"> VENTA</i></a>
+            <a class="nav-link" href="/proyecto_uno/registro"><i class="bi bi-person"> REGISTRAR</i></a>
           </li>
         </ul>
       </div>
