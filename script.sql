@@ -9,6 +9,7 @@ create table usuarios(
     us_dpi varchar(13),
     us_correo varchar(100),
     us_contrasenia lvarchar(1056),
+    us_confirmar_contra lvarchar(1056),
     us_token lvarchar,
     us_fecha_creacion date default today,
     us_fecha_contrasenia date default today,
