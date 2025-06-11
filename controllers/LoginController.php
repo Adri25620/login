@@ -9,6 +9,10 @@ class LoginController extends ActiveRecord
 {
     public function index(Router $router)
     {
-        $router->render('login/index', [], 'layouts/principal');
+        $router->render('pages/index', [], 'layouts/principal');
+    }
+
+    public static function Login() {
+
     }
 }

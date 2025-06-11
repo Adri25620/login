@@ -8,9 +8,9 @@
     <title>DemoApp</title>
 </head>
 <body>
-
+<?php echo $contenido; ?>
+       
         
-        <?php echo $contenido; ?>
     </div>
     <div class="container-fluid " >
         <div class="row justify-content-center text-center">

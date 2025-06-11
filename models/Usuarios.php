@@ -20,6 +20,7 @@ class Usuarios extends ActiveRecord
         'us_token',
         'us_fecha_creacion',
         'us_fecha_contrasenia',
+        'us_foto',
         'us_situacion'
     ];
     public static $idTabla = 'us_id';
@@ -37,11 +38,12 @@ class Usuarios extends ActiveRecord
     public $us_token;
     public $us_fecha_creacion;
     public $us_fecha_contrasenia;
+    public $us_foto;
     public $us_situacion;
 
 
     public function __construct($args = []){
-        $this->us_id = $args['us_id'] ?? null;
+    $this->us_id = $args['us_id'] ?? null;
     $this->us_pri_nombre = $args['us_pri_nombre'] ?? '';
     $this->us_seg_nombre = $args['us_seg_nombre'] ?? '';
     $this->us_pri_apellido = $args['us_pri_apellido'] ?? '';
@@ -54,6 +56,7 @@ class Usuarios extends ActiveRecord
     $this->us_token = $args['us_token'] ?? '';
     $this->us_fecha_creacion = $args['us_fecha_creacion'] ?? '';
     $this->us_fecha_contrasenia = $args['us_fecha_contrasenia'] ?? '';
+    $this->us_foto = $usuario['us_foto'] ?? null;
     $this->us_situacion = $args['us_situacion'] ?? 1;    
         
     }

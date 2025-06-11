@@ -62,11 +62,11 @@
                         <div class="row mb-3 justify-content-center">
                             <div class="col-lg-6">
                                 <label for="us_direccion" class="form-label">Direccion</label>
-                                <textarea class="form-control" id="us_direccion" name="us_direccion" placeholder="Ingrese su domicilio" rows="2"></textarea>
+                                <input type="text" class="form-control" id="us_direccion" name="us_direccion" placeholder="Ingrese su dirección">
                             </div>
                             <div class="col-lg-6">
-                                <label for="us_fotografia" class="form-label">Fotografía</label>
-                                <input type="file" class="form-control form-control-lg" id="us_fotografia" name="us_fotografia" accept=".jpg,.jpeg,.png">
+                                <label for="us_foto" class="form-label">Fotografía</label>
+                                <input type="file" class="form-control form-control-lg" id="us_foto" name="us_foto" accept="image/*">
                                 <div class="form-text">Formatos permitidos: JPG, PNG. Máximo 2MB</div>
                             </div>
                         </div>
