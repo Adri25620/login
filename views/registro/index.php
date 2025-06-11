@@ -10,24 +10,16 @@
                 <div class="row justify-content-center p-5 shadow-lg">
 
                     <form id="FormUsuarios" enctype="multipart/form-data">
-                        <input type="hidden" id="usuario_id" name="usuario_id">
+                        <input type="hidden" id="us_id" name="us_id">
 
                         <div class="row mb-3 justify-content-center">
-                            <div class="col-lg-3">
-                                <label for="us_pri_nombre" class="form-label">Primer Nombre</label>
-                                <input type="text" class="form-control" id="us_pri_nombre" name="us_pri_nombre" placeholder="Ingrese su primer nombre">
+                            <div class="col-lg-6">
+                                <label for="us_nombres" class="form-label">Nombres Completos</label>
+                                <input type="text" class="form-control" id="us_nombres" name="us_nombres" placeholder="Ingrese sus nombres completos">
                             </div>
-                            <div class="col-lg-3">
-                                <label for="us_seg_nombre" class="form-label">Segundo Nombre</label>
-                                <input type="text" class="form-control" id="us_seg_nombre" name="us_seg_nombre" placeholder="Ingrese su segundo nombre">
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="us_pri_apellido" class="form-label">Primer Apellido</label>
-                                <input type="text" class="form-control" id="us_pri_apellido" name="us_pri_apellido" placeholder="Ingrese su primer apellido">
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="us_seg_apellido" class="form-label">Segundo Apellido</label>
-                                <input type="text" class="form-control" id="us_seg_apellido" name="us_seg_apellido" placeholder="Ingrese su segundo apellido">
+                            <div class="col-lg-6">
+                                <label for="us_apellidos" class="form-label">Apellidos Completos</label>
+                                <input type="text" class="form-control" id="us_apellidos" name="us_apellidos" placeholder="Ingrese sus apellidos completos">
                             </div>
                         </div>
 
@@ -60,13 +52,24 @@
                         </div>
 
                         <div class="row mb-3 justify-content-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <label for="us_direccion" class="form-label">Direccion</label>
                                 <input type="text" class="form-control" id="us_direccion" name="us_direccion" placeholder="Ingrese su dirección">
                             </div>
-                            <div class="col-lg-6">
-                                <label for="us_foto" class="form-label">Fotografía</label>
-                                <input type="file" class="form-control form-control-lg" id="us_foto" name="us_foto" accept="image/*">
+                            <div class="col-lg-4">
+                                <label for="us_rol" class="form-label">Seleccione el rol:</label>
+                                <select name="us_rol" id="us_rol" class="form-select" required>
+                                    <option value="" selected disabled>Seleccione un rol...</option>
+                                    <?php foreach ($roles as $rol): ?>
+                                        <?php if ($rol->rol_situacion == 1): ?>
+                                            <option value="<?= $rol->rol_id ?>"><?= $rol->rol_nombre ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="us_fotografia" class="form-label">Fotografía</label>
+                                <input type="file" class="form-control form-control-lg" id="us_fotografia" name="us_fotografia" accept="image/*">
                                 <div class="form-text">Formatos permitidos: JPG, PNG. Máximo 2MB</div>
                             </div>
                         </div>

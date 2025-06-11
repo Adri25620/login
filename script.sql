@@ -1,43 +1,32 @@
 create table usuarios(
     us_id serial primary key,
-    us_pri_nombre varchar(100),
-    us_seg_nombre varchar(100),
-    us_pri_apellido varchar(100),
-    us_seg_apellido varchar(100),
+    us_nombres varchar(100),
+    us_apellidos varchar(100),
     us_telefono integer,
     us_direccion varchar(250),
     us_dpi varchar(13),
     us_correo varchar(100),
+    us_rol integer,
     us_contrasenia lvarchar(1056),
     us_confirmar_contra lvarchar(1056),
     us_token lvarchar,
-    us_fecha_creacion date default today,
-    us_fecha_contrasenia date default today,
+    us_fecha_creacion datetime year to minute default current year to minute,
+    us_fecha_contrasenia datetime year to minute default current year to minute,
     us_foto lvarchar(2056),
     us_situacion char(1)
 );
 
+alter table usuarios add constraint (foreign key(us_rol)
+references rol(rol_id) constraint fk_us_rol)
 
 
-create table asig_permiso(
-    asig_id serial primary key,
-    asig_usuario integer,
-    asig_aplicacion integer,
-    asig_permiso integer,
-    asig_fecha date default today,
-    asig_us_asignado integer,
-    asig_motivo varchar(250),
-    asig_situacion char(1)
+
+create table rol (
+    rol_id serial primary key,
+    rol_nombre varchar(75),
+    rol_nombre_ct varchar(25),
+    rol_situacion char(1)
 );
-
-alter table asig_permiso add constraint (foreign key(asig_usuario)
-references usuarios(us_id) constraint fk_asig_us)
-
-alter table asig_permiso add constraint (foreign key(asig_aplicacion)
-references aplicacion(ap_id) constraint fk_asig_ap)
-
-alter table asig_permiso add constraint (foreign key(asig_permiso)
-references permisos(per_id) constraint fk_asig_per)
 
 
 
@@ -46,7 +35,7 @@ create table aplicacion(
     ap_nombre_lg varchar(150),
     ap_nombre_md varchar(100),
     ap_nombre_ct varchar(50),
-    ap_fecha_creacion date default today,
+    ap_fecha_creacion datetime year to minute default current year to minute,
     ap_situacion char(1)
 );
 
@@ -58,7 +47,7 @@ create table permisos(
     per_nombre_permiso varchar(250),
     per_clave_permiso varchar(250),
     per_descripcion varchar(250),
-    per_fecha date default today,
+    per_fecha datetime year to minute default current year to minute,
     per_situacion char(1)
 );
 
@@ -101,7 +90,7 @@ create table marcas_celulares (
     mar_id serial primary key,
     mar_nombre varchar(50),
     mar_descripcion varchar(200),
-    mar_fecha_creacion date default today,
+    mar_fecha_creacion datetime year to minute default current year to minute,
     mar_situacion char(1)
 );
 
@@ -153,7 +142,7 @@ create table ventas (
     ven_id serial primary key,
     ven_cliente integer,
     ven_usuario integer,
-    ven_fecha_venta date default today,
+    ven_fecha_venta datetime year to minute default current year to minute,
     ven_total decimal(10,2),
     ven_observaciones lvarchar,
     ven_situacion char(1),
@@ -192,7 +181,7 @@ create table ordenes_reparacion (
     or_numero_orden varchar(20),
     or_cliente integer,
     or_usuario_recepcion integer,
-    or_fecha_recepcion date default today,
+    or_fecha_recepcion datetime year to minute default current year to minute,
     or_fecha_entrega datetime year to minute,
     or_marca_dispositivo varchar(50),
     or_modelo_dispositivo varchar(100),
@@ -218,12 +207,9 @@ create table detalle_servicios_orden (
     dso_tipo_servicio integer,
     dso_descripcion varchar(200),
     dso_precio decimal(10,2),
-    dso_tiempo_empleado_horas decimal(4,2),
     dso_fecha_servicio datetime year to minute default current year to minute,
-    dso_estado varchar(20) default 'pendiente',
-    dso_situacion char(1) default 'a',
-    foreign key (dso_orden) references ordenes_reparacion(or_id),
-    foreign key (dso_tipo_servicio) references tipos_servicio(ts_id)
+    dso_estado varchar(20) default 'PENDIENTE',
+    dso_situacion char(1),
 );
 
 alter table detalle_servicios_orden add constraint (foreign key(dso_orden)
@@ -245,9 +231,7 @@ create table movimientos_inventario (
     mi_fecha_movimiento datetime year to minute default current year to minute,
     mi_referencia_documento varchar(50),
     mi_observaciones varchar(200),
-    mi_situacion char(1) default 'a',
-    foreign key (mi_producto) references inventario_celulares(inv_id),
-    foreign key (mi_usuario) references usuarios(us_id)
+    mi_situacion char(1),
 );
 
 alter table movimientos_inventario add constraint (foreign key(mi_producto)
