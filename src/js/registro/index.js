@@ -101,12 +101,9 @@ const limpiarTodo = () => {
     BtnModificar.classList.add('d-none');
     
     // Limpiar validaciones visuales
-    FormUsuarios.querySelectorAll('.form-control').forEach(input => {
-        input.classList.remove('is-valid', 'is-invalid');
-    });
-    
-    FormUsuarios.querySelectorAll('.form-select').forEach(select => {
-        select.classList.remove('is-valid', 'is-invalid');
+    FormUsuarios.querySelectorAll('.form-control, .form-select').forEach(element => {
+        element.classList.remove('is-valid', 'is-invalid');
+        element.title = ''; // Limpiar tooltips
     });
 }
 
@@ -134,7 +131,7 @@ const GuardarUsuario = async (event) => {
 
     const body = new FormData(FormUsuarios);
 
-    const url = '/proyecto_uno/api/registro/guardar';
+    const url = '/proyecto_uno/registro/guardar';
     const config = {
         method: 'POST',
         body
@@ -154,7 +151,15 @@ const GuardarUsuario = async (event) => {
                 showConfirmButton: true,
             });
 
-            limpiarTodo();
+            // Limpiar formulario y validaciones
+            FormUsuarios.reset();
+            FormUsuarios.querySelectorAll('.form-control, .form-select').forEach(element => {
+                element.classList.remove('is-valid', 'is-invalid');
+                element.title = '';
+            });
+            BtnGuardar.classList.remove('d-none');
+            BtnModificar.classList.add('d-none');
+            
             BuscarUsuarios();
 
         } else {
@@ -174,7 +179,7 @@ const GuardarUsuario = async (event) => {
 }
 
 const BuscarUsuarios = async () => {
-    const url = '/proyecto_uno/api/registro/buscar';
+    const url = '/proyecto_uno/registro/buscar';
     const config = {
         method: 'GET'
     }
@@ -262,7 +267,7 @@ const llenarFormulario = async (event) => {
     const datos = event.currentTarget.dataset;
     const usuarioId = datos.id;
 
-    const url = `/proyecto_uno/api/registro/buscar?id=${usuarioId}`;
+    const url = `/proyecto_uno/registro/buscar?id=${usuarioId}`;
     const config = {
         method: 'GET'
     }
@@ -324,7 +329,7 @@ const ModificarUsuario = async (event) => {
 
     const body = new FormData(FormUsuarios);
 
-    const url = '/proyecto_uno/api/registro/modificar';
+    const url = '/proyecto_uno/registro/modificar';
     const config = {
         method: 'POST',
         body
@@ -379,7 +384,7 @@ const EliminarUsuarios = async (e) => {
     });
 
     if (AlertaConfirmarEliminar.isConfirmed) {
-        const url = `/proyecto_uno/api/registro/eliminar?id=${idUsuario}`;
+        const url = `/proyecto_uno/registro/eliminar?id=${idUsuario}`;
         const config = {
             method: 'GET'
         }

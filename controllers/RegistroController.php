@@ -310,7 +310,7 @@ class RegistroController extends ActiveRecord
         }
     }
 
-    public static function EliminarAPI()
+    public static function eliminarAPI()
     {
         try {
             $usuario_id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
