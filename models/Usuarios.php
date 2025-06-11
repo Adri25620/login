@@ -78,7 +78,7 @@ class Usuarios extends ActiveRecord
                 u.us_dpi,
                 u.us_correo,
                 u.us_foto,
-                r.rol_nombre,
+                r.rol_nombre
               FROM usuarios u
               INNER JOIN rol r ON u.us_rol = r.rol_id
               WHERE u.us_situacion = 1

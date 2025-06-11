@@ -22,9 +22,9 @@ $router->post('/API/login', [LoginController::class, 'index']);
 
 //url's registrar
 $router->get('/registro', [RegistroController::class, 'index']);
-$router->get('/api/registro/buscar', [RegistroController::class, 'buscarAPI']);
-$router->get('/api/registro/eliminar', [RegistroController::class, 'eliminarAPI']);
-$router->post('/api/registro/guardar', [RegistroController::class, 'guardarAPI']);
+$router->get('/registro/buscar', [RegistroController::class, 'buscarAPI']);
+$router->get('/registro/eliminar', [RegistroController::class, 'eliminarAPI']);
+$router->post('/registro/guardar', [RegistroController::class, 'guardarAPI']);
 
 
 

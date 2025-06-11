@@ -116,8 +116,7 @@ create table inventario_celulares (
     inv_precio decimal(10,2),
     inv_stock integer,
     inv_estado varchar(20),
-    inv_situacion char(1),
-    foreign key (inv_marca) references marcas_celulares(mar_id)
+    inv_situacion char(1)
 );
 
 alter table inventario_celulares add constraint (foreign key(inv_marca)
@@ -145,7 +144,7 @@ create table ventas (
     ven_fecha_venta datetime year to minute default current year to minute,
     ven_total decimal(10,2),
     ven_observaciones lvarchar,
-    ven_situacion char(1),
+    ven_situacion char(1)
 );
 
 alter table ventas add constraint (foreign key(ven_cliente)
@@ -165,7 +164,7 @@ create table detalle_ventas (
     dv_cantidad integer,
     dv_precio decimal(10,2),
     dv_precio_total decimal(10,2),
-    dv_situacion char(1),
+    dv_situacion char(1)
 );
 
 alter table detalle_ventas add constraint (foreign key(dv_venta)
@@ -188,7 +187,7 @@ create table ordenes_reparacion (
     or_problema_reportado lvarchar,
     or_estado varchar(20),
     or_costo_final decimal(10,2),
-    or_situacion char(1),
+    or_situacion char(1)
 );
 
 alter table ordenes_reparacion add constraint (foreign key(or_cliente)
@@ -209,7 +208,7 @@ create table detalle_servicios_orden (
     dso_precio decimal(10,2),
     dso_fecha_servicio datetime year to minute default current year to minute,
     dso_estado varchar(20) default 'PENDIENTE',
-    dso_situacion char(1),
+    dso_situacion char(1)
 );
 
 alter table detalle_servicios_orden add constraint (foreign key(dso_orden)
@@ -231,7 +230,7 @@ create table movimientos_inventario (
     mi_fecha_movimiento datetime year to minute default current year to minute,
     mi_referencia_documento varchar(50),
     mi_observaciones varchar(200),
-    mi_situacion char(1),
+    mi_situacion char(1)
 );
 
 alter table movimientos_inventario add constraint (foreign key(mi_producto)
