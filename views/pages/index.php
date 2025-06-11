@@ -47,4 +47,4 @@
     </div>
 </div>
 
-<script src="<?= asset('build/js/login/login.js')?>"></script>
+<script src="<?= asset('build/js/login/index.js')?>"></script>

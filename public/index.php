@@ -10,22 +10,23 @@ use Controllers\RegistroController;
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
-$router->get('/', [AppController::class, 'index']);
-
 
 
 //url's login
 $router->get('/', [LoginController::class, 'index']);
 $router->post('/API/login', [LoginController::class, 'index']);
+$router->get('/inicio', [LoginController::class,'inicio']);
 
 
 
 //url's registrar
 $router->get('/registro', [RegistroController::class, 'index']);
-$router->post('/registro/modificar', [RegistroController::class, 'modificarAPI']);
-$router->get('/registro/buscar', [RegistroController::class, 'buscarAPI']);
-$router->get('/registro/eliminar', [RegistroController::class, 'eliminarAPI']);
-$router->post('/registro/guardar', [RegistroController::class, 'guardarAPI']);
+$router->post('/registro/modificarAPI', [RegistroController::class, 'modificarAPI']);
+$router->get('/registro/buscarAPI', [RegistroController::class, 'buscarAPI']);
+$router->get('/registro/eliminarAPI', [RegistroController::class, 'eliminarAPI']);
+$router->post('/registro/guardarAPI', [RegistroController::class, 'guardarAPI']);
+
+
 
 
 

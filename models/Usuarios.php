@@ -68,23 +68,24 @@ class Usuarios extends ActiveRecord
 
 
     public static function obtenerUsuariosConRol()
-    {
-        $sql = "SELECT 
-                u.us_id,
-                u.us_nombres,
-                u.us_apellidos,
-                u.us_telefono,
-                u.us_direccion,
-                u.us_dpi,
-                u.us_correo,
-                u.us_foto,
-                r.rol_nombre
-              FROM usuarios u
-              INNER JOIN rol r ON u.us_rol = r.rol_id
-              WHERE u.us_situacion = 1
-              ORDER BY u.us_id DESC";
-        
-        return self::fetchArray($sql);
-    }
+{
+    $sql = "SELECT 
+            u.us_id,
+            u.us_nombres,
+            u.us_apellidos,
+            u.us_telefono,
+            u.us_direccion,
+            u.us_dpi,
+            u.us_correo,
+            u.us_foto, 
+            u.us_rol,
+            r.rol_nombre
+          FROM usuarios u
+          INNER JOIN rol r ON u.us_rol = r.rol_id
+          WHERE u.us_situacion = 1
+          ORDER BY u.us_id DESC";
+    
+    return self::fetchArray($sql);
+}
 
 }

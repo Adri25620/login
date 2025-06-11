@@ -18,10 +18,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item me-4">
-            <a class="nav-link active" aria-current="page" href="/proyecto_uno/"><i class="bi bi-house"> INICIO</i></a>
+            <a class="nav-link active" aria-current="page" href="/proyecto_uno/inicio"><i class="bi bi-house"> INICIO</i></a>
           </li>
           <li class="nav-item me-4">
             <a class="nav-link" href="/proyecto_uno/registro"><i class="bi bi-person"> REGISTRAR</i></a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" href="/proyecto_uno/"><i class="bi bi-person"> PERMISOS</i></a>
           </li>
         </ul>
       </div>

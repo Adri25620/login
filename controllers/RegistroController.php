@@ -225,26 +225,36 @@ class RegistroController extends ActiveRecord
         }
     }
 
-    public static function buscarAPI()
-    {
-        try {
-            $usuarios = Usuarios::obtenerUsuariosConRol();
-
-            http_response_code(200);
-            echo json_encode([
-                'codigo' => 1,
-                'mensaje' => 'Usuarios obtenidos satisfactoriamente',
-                'data' => $usuarios
-            ]);
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'codigo' => 0,
-                'mensaje' => 'Error al obtener los usuarios',
-                'detalle' => $e->getMessage(),
-            ]);
+   public static function buscarAPI()
+{
+    try {
+        $usuarios = Usuarios::obtenerUsuariosConRol();
+        
+        // Procesar cada usuario para preparar la foto base64
+        foreach ($usuarios as &$usuario) {
+            if (!empty($usuario['us_foto'])) {
+                // La foto ya está en base64, solo agregar el prefijo data:image
+                $usuario['foto_url'] = 'data:image/jpeg;base64,' . $usuario['us_foto'];
+            } else {
+                $usuario['foto_url'] = null;
+            }
         }
+
+        http_response_code(200);
+        echo json_encode([
+            'codigo' => 1,
+            'mensaje' => 'Usuarios obtenidos satisfactoriamente',
+            'data' => $usuarios
+        ]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode([
+            'codigo' => 0,
+            'mensaje' => 'Error al obtener los usuarios',
+            'detalle' => $e->getMessage(),
+        ]);
     }
+}
 
     public static function modificarAPI()
     {
