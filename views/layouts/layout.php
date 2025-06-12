@@ -21,11 +21,24 @@
             <a class="nav-link active" aria-current="page" href="/proyecto_uno/inicio"><i class="bi bi-house"> INICIO</i></a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/registro"><i class="bi bi-person"> REGISTRAR</i></a>
+            <a class="nav-link" href="/proyecto_uno/registro"><i class="bi bi-person"> USUARIOS</i></a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/"><i class="bi bi-person"> PERMISOS</i></a>
+            <a class="nav-link" href="/proyecto_uno/permisos"><i class="bi bi-person"> PERMISOS</i></a>
           </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" href="/proyecto_uno/aplicacion"><i class="bi bi-person"> APLICACIONES</i></a>
+          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            OPCIONES
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
         </ul>
       </div>
     </div>
@@ -46,5 +59,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
