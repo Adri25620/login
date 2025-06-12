@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Guatemala');
+
 function debuguear($variable) {
     echo "<pre>";
     var_dump($variable);

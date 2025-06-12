@@ -5,6 +5,7 @@ use Controllers\AplicacionController;
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\LoginController;
+use Controllers\MarcaCelController;
 use Controllers\PermisoController;
 use Controllers\RegistroController;
 use Controllers\RolController;
@@ -55,6 +56,14 @@ $router->get('/rol/buscarAPI', [RolController::class, 'buscarAPI']);
 $router->get('/rol/eliminarAPI', [RolController::class, 'eliminarAPI']);
 $router->post('/rol/guardarAPI', [RolController::class, 'guardarAPI']);
 
+
+
+//url's registrar marcas celulares
+$router->get('/marcas', [MarcaCelController::class, 'index']);
+$router->post('/marcas/modificarAPI', [MarcaCelController::class, 'modificarAPI']);
+$router->get('/marcas/buscarAPI', [MarcaCelController::class, 'buscarAPI']);
+$router->get('/marcas/eliminarAPI', [MarcaCelController::class, 'eliminarAPI']);
+$router->post('/marcas/guardarAPI', [MarcaCelController::class, 'guardarAPI']);
 
 
 

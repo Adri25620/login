@@ -17,6 +17,4 @@ class RolController extends ActiveRecord
     
     }
 
-
-
 }

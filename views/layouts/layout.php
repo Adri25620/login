@@ -20,15 +20,7 @@
           <li class="nav-item me-4">
             <a class="nav-link active" aria-current="page" href="/proyecto_uno/inicio"><i class="bi bi-house"> INICIO</i></a>
           </li>
-          <li class="nav-item me-4">
-            <a class="nav-link" href=""><i class="bi bi-person"> o</i></a>
-          </li>
-          <li class="nav-item me-4">
-            <a class="nav-link" href=""><i class="bi bi-person"> o</i></a>
-          </li>
-          <li class="nav-item me-4">
-            <a class="nav-link" href=""><i class="bi bi-person"> o</i></a>
-          </li>
+          
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             ADMINISTRADOR
@@ -40,7 +32,20 @@
             <li><a class="dropdown-item" href="/proyecto_uno/rol">ROLES</a></li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            TIENDA
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/proyecto_uno/clientes">CLIENTES</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/ventas">VENTAS</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/inventario">INVENTARIO</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/marcas">MARCAS</a></li>
+          </ul>
+        </li>
         </ul>
+        
       </div>
     </div>
   </nav>
