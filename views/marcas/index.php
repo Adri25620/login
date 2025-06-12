@@ -13,21 +13,16 @@
 
                         <div class="row mb-3 justify-content-center">
                             <div class="col-lg-6">
-                                <label for="mar_nombre" class="form-label">
-                                    <i class="bi bi-phone me-2"></i>Nombre de la Marca
-                                </label>
+                                <label for="mar_nombre" class="form-label">Nombre de la Marca</label>
                                 <input type="text" class="form-control" id="mar_nombre" name="mar_nombre" 
-                                       placeholder="Ej. Samsung, iPhone, Xiaomi" maxlength="50" required>
-                                <div class="form-text">Máximo 50 caracteres</div>
+                                       placeholder="Ej. Samsung, iPhone, Xiaomi" required>
                             </div>
                         </div>
 
                         <div class="row mb-3 justify-content-center">
                             <div class="col-lg-12">
-                                <label for="mar_descripcion" class="form-label">
-                                    <i class="bi bi-card-text me-2"></i>Descripción
-                                </label>
-                                <input type="text" class="form-control" id="mar_descripcion" name="mar_descripcion" placeholder="Descripción detallada de la marca">
+                                <label for="mar_descripcion" class="form-label">Descripcion</label>
+                                <input type="text" class="form-control" id="mar_descripcion" name="mar_descripcion" placeholder="Descripcion detallada">
                             </div>
                         </div>
 

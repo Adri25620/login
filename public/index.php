@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 use Controllers\AplicacionController;
 use MVC\Router;
 use Controllers\AppController;
+use Controllers\ClienteController;
 use Controllers\LoginController;
 use Controllers\MarcaCelController;
 use Controllers\PermisoController;
@@ -64,6 +65,15 @@ $router->post('/marcas/modificarAPI', [MarcaCelController::class, 'modificarAPI'
 $router->get('/marcas/buscarAPI', [MarcaCelController::class, 'buscarAPI']);
 $router->get('/marcas/eliminarAPI', [MarcaCelController::class, 'eliminarAPI']);
 $router->post('/marcas/guardarAPI', [MarcaCelController::class, 'guardarAPI']);
+
+
+
+//url's registrar clientes clientes
+$router->get('/clientes', [ClienteController::class, 'index']);
+$router->post('/clientes/modificarAPI', [ClienteController::class, 'modificarAPI']);
+$router->get('/clientes/buscarAPI', [ClienteController::class, 'buscarAPI']);
+$router->get('/clientes/eliminarAPI', [ClienteController::class, 'eliminarAPI']);
+$router->post('/clientes/guardarAPI', [ClienteController::class, 'guardarAPI']);
 
 
 

@@ -11,6 +11,7 @@ module.exports = {
     'js/permisos/index' : './src/js/permisos/index.js',
     'js/roles/index' : './src/js/roles/index.js',
     'js/marcas/index' : './src/js/marcas/index.js',
+    'js/clientes/index' : './src/js/clientes/index.js',
   },
   output: {
     filename: '[name].js',
