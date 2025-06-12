@@ -8,8 +8,27 @@ const FormClientes = document.getElementById('FormClientes');
 const BtnGuardar = document.getElementById('BtnGuardar');
 const BtnModificar = document.getElementById('BtnModificar');
 const BtnLimpiar = document.getElementById('BtnLimpiar');
+const BtnMostrarRegistros = document.getElementById('BtnMostrarRegistros');
+const SeccionTabla = document.getElementById('SeccionTablaClientes');
 const InputClienteTelefono = document.getElementById('cli_telefono');
 const cliente_nit = document.getElementById('cli_nit');
+
+const MostrarRegistros = () => {
+    const estaOculto = SeccionTabla.style.display === 'none';
+    
+    if (estaOculto) {
+        SeccionTabla.style.display = 'block';
+        BtnMostrarRegistros.innerHTML = '<i class="bi bi-eye-slash me-2"></i>Ocultar Registros';
+        BtnMostrarRegistros.classList.remove('btn-info');
+        BtnMostrarRegistros.classList.add('btn-warning');
+        BuscarClientes(true);
+    } else {
+        SeccionTabla.style.display = 'none';
+        BtnMostrarRegistros.innerHTML = '<i class="bi bi-eye me-2"></i>Mostrar Registros';
+        BtnMostrarRegistros.classList.remove('btn-warning');
+        BtnMostrarRegistros.classList.add('btn-info');
+    }
+}
 
 const ValidarTelefono = () => {
 
@@ -128,7 +147,6 @@ const GuardarCliente = async (event) => {
             });
 
             limpiarTodo();
-            BuscarClientes();
 
         } else {
 
@@ -149,7 +167,7 @@ const GuardarCliente = async (event) => {
 
 }
 
-const BuscarClientes = async () => {
+const BuscarClientes = async (mostrarMensaje = false) => {
 
     const url = '/proyecto_uno/clientes/buscarAPI';
     const config = {
@@ -164,13 +182,16 @@ const BuscarClientes = async () => {
 
         if (codigo == 1) {
 
-            await Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Exito",
-                text: mensaje,
-                showConfirmButton: true,
-            });
+            if (mostrarMensaje) {
+                await Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Exito",
+                    text: `Se cargaron ${data.length} cliente(s) correctamente`,
+                    showConfirmButton: true,
+                    timer: 2000
+                });
+            }
 
             datatable.clear().draw();
             datatable.rows.add(data).draw();
@@ -320,7 +341,7 @@ const ModificarCliente = async (event) => {
             });
 
             limpiarTodo();
-            BuscarClientes();
+            BuscarClientes(true);
 
         } else {
 
@@ -380,7 +401,7 @@ const EliminarClientes = async (e) => {
                     showConfirmButton: true,
                 });
                 
-                BuscarClientes();
+                BuscarClientes(true);
             } else {
                 await Swal.fire({
                     position: "center",
@@ -398,7 +419,8 @@ const EliminarClientes = async (e) => {
     }
 }
 
-BuscarClientes();
+
+BuscarClientes(); 
 datatable.on('click', '.eliminar', EliminarClientes);
 datatable.on('click', '.modificar', llenarFormulario);
 FormClientes.addEventListener('submit', GuardarCliente);
@@ -406,3 +428,4 @@ cliente_nit.addEventListener('change', EsValidoNit);
 InputClienteTelefono.addEventListener('change', ValidarTelefono);
 BtnLimpiar.addEventListener('click', limpiarTodo);
 BtnModificar.addEventListener('click', ModificarCliente);
+BtnMostrarRegistros.addEventListener('click', MostrarRegistros);

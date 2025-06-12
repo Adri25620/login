@@ -68,6 +68,12 @@
                                     <i class="bi bi-arrow-clockwise me-2"></i>Limpiar
                                 </button>
                             </div>
+
+                            <div class="col-auto">
+                                <button class="btn btn-info" type="button" id="BtnMostrarRegistros">
+                                    <i class="bi bi-eye me-2"></i>Mostrar Registros
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -76,7 +82,7 @@
     </div>
 </div>
 
-<div class="row justify-content-center p-3">
+<div class="row justify-content-center p-3" id="SeccionTablaClientes" style="display: none">
     <div class="col-lg-12">
         <div class="card custom-card shadow-lg" style="border-radius: 10px; border: 1px solid #17a2b8;">
             <div class="card-body p-3">
