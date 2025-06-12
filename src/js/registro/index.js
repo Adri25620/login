@@ -1,9 +1,9 @@
 // Importar las librerías necesarias para el funcionamiento
-import { Dropdown } from "bootstrap";
 import Swal from "sweetalert2";
 import { validarFormulario } from '../funciones';
 import DataTable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
+
 
 // Aquí se capturan los elementos del formulario y botones del HTML
 const FormUsuarios = document.getElementById('FormUsuarios');

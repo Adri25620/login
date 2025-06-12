@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="build/js/app.js"></script>
+    <script src="<?= asset('build/js/app.js') ?>"></script>
     <link rel="shortcut icon" href="<?= asset('images/cit.png') ?>" type="image/x-icon">
     <link rel="stylesheet" href="<?= asset('build/styles.css') ?>">
     <title>DemoApp</title>
@@ -21,22 +21,23 @@
             <a class="nav-link active" aria-current="page" href="/proyecto_uno/inicio"><i class="bi bi-house"> INICIO</i></a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/registro"><i class="bi bi-person"> USUARIOS</i></a>
+            <a class="nav-link" href=""><i class="bi bi-person"> o</i></a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/permisos"><i class="bi bi-person"> PERMISOS</i></a>
+            <a class="nav-link" href=""><i class="bi bi-person"> o</i></a>
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="/proyecto_uno/aplicacion"><i class="bi bi-person"> APLICACIONES</i></a>
+            <a class="nav-link" href=""><i class="bi bi-person"> o</i></a>
           </li>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            OPCIONES
+            ADMINISTRADOR
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/registro">USUARIOS</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/permisos">PERMISOS</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/aplicacion">APLICACIONES</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/rol">ROLES</a></li>
           </ul>
         </li>
         </ul>
@@ -60,7 +61,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

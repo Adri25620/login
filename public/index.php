@@ -7,6 +7,7 @@ use Controllers\AppController;
 use Controllers\LoginController;
 use Controllers\PermisoController;
 use Controllers\RegistroController;
+use Controllers\RolController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -44,6 +45,15 @@ $router->post('/permisos/modificarAPI', [PermisoController::class, 'modificarAPI
 $router->get('/permisos/buscarAPI', [PermisoController::class, 'buscarAPI']);
 $router->get('/permisos/eliminarAPI', [PermisoController::class, 'eliminarAPI']);
 $router->post('/permisos/guardarAPI', [PermisoController::class, 'guardarAPI']);
+
+
+
+//url's registrar roles
+$router->get('/rol', [RolController::class, 'index']);
+$router->post('/rol/modificarAPI', [RolController::class, 'modificarAPI']);
+$router->get('/rol/buscarAPI', [RolController::class, 'buscarAPI']);
+$router->get('/rol/eliminarAPI', [RolController::class, 'eliminarAPI']);
+$router->post('/rol/guardarAPI', [RolController::class, 'guardarAPI']);
 
 
 

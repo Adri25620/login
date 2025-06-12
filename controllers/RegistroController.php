@@ -17,7 +17,7 @@ class RegistroController extends ActiveRecord
         
         $router->render('registro/index', [
             'roles' => $roles
-        ]);
+        ], 'layouts/layout');
     }
 
     public static function guardarAPI()
