@@ -36,3 +36,5 @@
         </div>
     </div>
 </div>
+
+<script src="<?= asset('build/js/bienvenida/index.js')?>"></script>
