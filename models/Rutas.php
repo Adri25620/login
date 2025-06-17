@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+use Model\ActiveRecord;
 
 class Rutas extends ActiveRecord
 {

@@ -48,6 +48,11 @@
                                     Limpiar
                                 </button>
                             </div>
+                            <div class="col-auto">
+                                <button class="btn btn-info" type="button" id="BtnMostrarRegistros">
+                                    <i class="bi bi-eye me-2"></i>Mostrar Registros
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -56,7 +61,7 @@
     </div>
 </div>
 
-<div class="row justify-content-center p-3">
+<div class="row justify-content-center p-3" id="SeccionTablaAplicaciones" style="display:none;">
     <div class="col-lg-10">
         <div class="card custom-card shadow-lg" style="border-radius: 10px; border: 1px solid #007bff;">
             <div class="card-body p-3">

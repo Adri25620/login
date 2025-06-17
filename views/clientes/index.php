@@ -14,39 +14,39 @@
                         <div class="row mb-3 justify-content-center">
                             <div class="col-lg-6">
                                 <label for="cli_nombres" class="form-label">Nombres Completos</label>
-                                <input type="text" class="form-control" id="cli_nombres" name="cli_nombres" 
-                                       placeholder="Ej. Juan" required>
+                                <input type="text" class="form-control" id="cli_nombres" name="cli_nombres"
+                                    placeholder="Ej. Juan" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="cli_apellidos" class="form-label">Apellidos Completos</label>
-                                <input type="text" class="form-control" id="cli_apellidos" name="cli_apellidos" 
-                                       placeholder="Ej. Garcia" required>
+                                <input type="text" class="form-control" id="cli_apellidos" name="cli_apellidos"
+                                    placeholder="Ej. Garcia" required>
                             </div>
                         </div>
 
                         <div class="row mb-3 justify-content-center">
                             <div class="col-lg-4">
                                 <label for="cli_nit" class="form-label">NIT</label>
-                                <input type="text" class="form-control" id="cli_nit" name="cli_nit" 
-                                       placeholder="Ej. 12345678-9">
+                                <input type="text" class="form-control" id="cli_nit" name="cli_nit"
+                                    placeholder="Ej. 12345678-9">
                             </div>
                             <div class="col-lg-4">
                                 <label for="cli_telefono" class="form-label">Telefono</label>
-                                <input type="number" class="form-control" id="cli_telefono" name="cli_telefono" 
-                                       placeholder="Ej. 12345678">
+                                <input type="number" class="form-control" id="cli_telefono" name="cli_telefono"
+                                    placeholder="Ej. 12345678">
                             </div>
                             <div class="col-lg-4">
                                 <label for="cli_correo" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="cli_correo" name="cli_correo" 
-                                       placeholder="ej. cliente@correo.com">
+                                <input type="email" class="form-control" id="cli_correo" name="cli_correo"
+                                    placeholder="ej. cliente@correo.com">
                             </div>
                         </div>
 
                         <div class="row mb-3 justify-content-center">
                             <div class="col-lg-12">
                                 <label for="cli_direccion" class="form-label">Direccion Completa</label>
-                                <input type="text" class="form-control" id="cli_direccion" name="cli_direccion" 
-                                       placeholder="Direccion completa del cliente">
+                                <input type="text" class="form-control" id="cli_direccion" name="cli_direccion"
+                                    placeholder="Direccion completa del cliente">
                             </div>
                         </div>
 
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<div class="row justify-content-center p-3" id="SeccionTablaClientes" style="display: none">
+<div class="row justify-content-center p-3"  id="SeccionTablaClientes" style="display: none">
     <div class="col-lg-12">
         <div class="card custom-card shadow-lg" style="border-radius: 10px; border: 1px solid #17a2b8;">
             <div class="card-body p-3">

@@ -1,3 +1,5 @@
+create database loginuno
+
 create table usuarios(
     us_id serial primary key,
     us_nombres varchar(100),
@@ -238,4 +240,3 @@ references inventario_celulares(inv_id) constraint fk_mi_inv);
 
 alter table movimientos_inventario add constraint (foreign key(mi_usuario)
 references usuarios(us_id) constraint fk_mi_us);
-

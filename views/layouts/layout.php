@@ -27,7 +27,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/proyecto_uno/registro">USUARIOS</a></li>
-            <li><a class="dropdown-item" href="/proyecto_uno/permisos">PERMISOS</a></li>
+            <li><a class="dropdown-item" href="/proyecto_uno/permiso">PERMISOS</a></li>
             <li><a class="dropdown-item" href="/proyecto_uno/aplicacion">APLICACIONES</a></li>
             <li><a class="dropdown-item" href="/proyecto_uno/rol">ROLES</a></li>
           </ul>

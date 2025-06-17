@@ -41,11 +41,11 @@
                         </div>
 
                         <div class="row mb-3 justify-content-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" id="grupo_password">
                                 <label for="us_contrasenia" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" id="us_contrasenia" name="us_contrasenia" placeholder="Ingrese su contraseña">
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" id="grupo_password_confirm">
                                 <label for="us_confirmar_contra" class="form-label">Confirmar Contraseña</label>
                                 <input type="password" class="form-control" id="us_confirmar_contra" name="us_confirmar_contra" placeholder="Confirme su contraseña">
                             </div>
@@ -67,9 +67,9 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="col-lg-4">
-                                <label for="us_fotografia" class="form-label">Fotografía</label>
-                                <input type="file" class="form-control form-control-lg" id="us_fotografia" name="us_fotografia" accept="image/*">
+                            <div class="col-lg-4" id="grupo_foto">
+                                <label for="us_foto" class="form-label">Fotografía</label>
+                                <input type="file" class="form-control form-control-lg" id="us_foto" name="us_foto" accept="image/*">
                                 <div class="form-text">Formatos permitidos: JPG, PNG. Máximo 2MB</div>
                             </div>
                         </div>
@@ -92,6 +92,11 @@
                                     Limpiar
                                 </button>
                             </div>
+                            <div class="col-auto">
+                                <button class="btn btn-info" type="button" id="BtnMostrarRegistros">
+                                    <i class="bi bi-eye me-2"></i>Mostrar Registros
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -100,8 +105,8 @@
     </div>
 </div>
 
-<div class="row justify-content-center p-3">
-    <div class="col-lg-10">
+<div class="row justify-content-center p-3" id="SeccionTablaUsuarios" style="display:none;">
+    <div class="col-lg-12">
         <div class="card custom-card shadow-lg" style="border-radius: 10px; border: 1px solid #007bff;">
             <div class="card-body p-3">
                 <h3 class="text-center">USUARIOS REGISTRADOS</h3>

@@ -11,7 +11,7 @@
 <?php echo $contenido; ?>
        
         
-    </div>
+  
     <div class="container-fluid " >
         <div class="row justify-content-center text-center">
             <div class="col-12">

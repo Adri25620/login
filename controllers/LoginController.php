@@ -10,10 +10,11 @@ class LoginController extends ActiveRecord
 {
     public static function index(Router $router)
     {
-        $router->render('pages/index', [], 'layout/login');
+        $router->render('pages/index', [], 'layouts/principal');
     }
 
-    public static function login()
+
+  public static function login()
     {
         getHeadersApi();
 

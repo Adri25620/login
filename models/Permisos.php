@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+use Model\ActiveRecord;
 
 class Permisos extends ActiveRecord
 {
@@ -32,7 +33,7 @@ class Permisos extends ActiveRecord
         $this->per_nombre_permiso = $args['per_nombre_permiso'] ?? '';
         $this->per_clave_permiso = $args['per_clave_permiso'] ?? '';
         $this->per_descripcion = $args['per_descripcion'] ?? '';
-        $this->per_fecha = $args['fecha'] ?? '';
+        $this->per_fecha = $args['per_fecha'] ?? '';
         $this->per_situacion = $args['per_situacion'] ?? 1;   
         
     }

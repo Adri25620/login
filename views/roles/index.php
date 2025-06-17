@@ -17,16 +17,14 @@
                                     <i class="bi bi-person-badge me-2"></i>Nombre del Rol
                                 </label>
                                 <input type="text" class="form-control" id="rol_nombre" name="rol_nombre" 
-                                       placeholder="Ej. Administrador del Sistema" maxlength="75" required>
-                                <div class="form-text">Máximo 75 caracteres</div>
+                                       placeholder="Ej. Administrador del Sistema" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="rol_nombre_ct" class="form-label">
                                     <i class="bi bi-tag me-2"></i>Nombre Corto
                                 </label>
                                 <input type="text" class="form-control" id="rol_nombre_ct" name="rol_nombre_ct" 
-                                       placeholder="Ej. ADMIN" maxlength="25" required>
-                                <div class="form-text">Máximo 25 caracteres (se convertirá a mayúsculas)</div>
+                                       placeholder="Ej. ADMIN" required>
                             </div>
                         </div>
 
@@ -48,6 +46,11 @@
                                     <i class="bi bi-arrow-clockwise me-2"></i>Limpiar
                                 </button>
                             </div>
+                            <div class="col-auto">
+                                <button class="btn btn-info" type="button" id="BtnMostrarRegistros">
+                                    <i class="bi bi-eye me-2"></i>Mostrar Registros
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -56,8 +59,8 @@
     </div>
 </div>
 
-<div class="row justify-content-center p-3">
-    <div class="col-lg-10">
+<div class="row justify-content-center p-3" id="SeccionTablaRoles" style="display: none">
+    <div class="col-lg-12">
         <div class="card custom-card shadow-lg" style="border-radius: 10px; border: 1px solid #007bff;">
             <div class="card-body p-3">
                 <h3 class="text-center mb-4">

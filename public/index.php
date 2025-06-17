@@ -42,11 +42,11 @@ $router->post('/aplicacion/guardarAPI', [AplicacionController::class, 'guardarAP
 
 
 //url's registrar permisos
-$router->get('/permisos', [PermisoController::class, 'index']);
-$router->post('/permisos/modificarAPI', [PermisoController::class, 'modificarAPI']);
-$router->get('/permisos/buscarAPI', [PermisoController::class, 'buscarAPI']);
-$router->get('/permisos/eliminarAPI', [PermisoController::class, 'eliminarAPI']);
-$router->post('/permisos/guardarAPI', [PermisoController::class, 'guardarAPI']);
+$router->get('/permiso', [PermisoController::class, 'index']);
+$router->post('/permiso/modificarAPI', [PermisoController::class, 'modificarAPI']);
+$router->get('/permiso/buscarAPI', [PermisoController::class, 'buscarAPI']);
+$router->get('/permiso/eliminarAPI', [PermisoController::class, 'eliminarAPI']);
+$router->post('/permiso/guardarAPI', [PermisoController::class, 'guardarAPI']);
 
 
 

@@ -10,11 +10,10 @@ use MVC\Router;
 
 class RegistroController extends ActiveRecord
 {
-
     public function index(Router $router)
     {
         $roles = Roles::all();
-        
+
         $router->render('registro/index', [
             'roles' => $roles
         ], 'layouts/layout');
@@ -25,162 +24,76 @@ class RegistroController extends ActiveRecord
         getHeadersApi();
 
         try {
-            // Validaciones básicas de campos obligatorios
+            // Validaciones iguales que las que tenías
             if (empty($_POST['us_nombres'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Los nombres son obligatorios'
-                ]);
+                self::error('Los nombres son obligatorios');
                 return;
             }
-
             if (empty($_POST['us_apellidos'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Los apellidos son obligatorios'
-                ]);
+                self::error('Los apellidos son obligatorios');
                 return;
             }
-
             if (empty($_POST['us_telefono']) || strlen($_POST['us_telefono']) != 8) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'El teléfono debe tener exactamente 8 dígitos'
-                ]);
+                self::error('El teléfono debe tener exactamente 8 dígitos');
                 return;
             }
-
             if (empty($_POST['us_dpi']) || strlen($_POST['us_dpi']) != 13) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'El DPI debe tener exactamente 13 dígitos'
-                ]);
+                self::error('El DPI debe tener exactamente 13 dígitos');
                 return;
             }
-
             if (empty($_POST['us_direccion'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'La dirección es obligatoria'
-                ]);
+                self::error('La dirección es obligatoria');
                 return;
             }
-
             if (empty($_POST['us_correo']) || !filter_var($_POST['us_correo'], FILTER_VALIDATE_EMAIL)) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'El correo electrónico es obligatorio y debe ser válido'
-                ]);
+                self::error('El correo electrónico es obligatorio y debe ser válido');
                 return;
             }
-
             if (empty($_POST['us_rol'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Debe seleccionar un rol'
-                ]);
+                self::error('Debe seleccionar un rol');
                 return;
             }
-
             if (empty($_POST['us_contrasenia']) || strlen($_POST['us_contrasenia']) < 10) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'La contraseña debe tener al menos 10 caracteres'
-                ]);
+                self::error('La contraseña debe tener al menos 10 caracteres');
                 return;
             }
-
-            // Validar complejidad de contraseña
             if (!preg_match('/[A-Z]/', $_POST['us_contrasenia'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'La contraseña debe contener al menos una letra mayúscula'
-                ]);
+                self::error('La contraseña debe contener al menos una letra mayúscula');
                 return;
             }
-
             if (!preg_match('/[a-z]/', $_POST['us_contrasenia'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'La contraseña debe contener al menos una letra minúscula'
-                ]);
+                self::error('La contraseña debe contener al menos una letra minúscula');
                 return;
             }
-
             if (!preg_match('/[0-9]/', $_POST['us_contrasenia'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'La contraseña debe contener al menos un número'
-                ]);
+                self::error('La contraseña debe contener al menos un número');
                 return;
             }
-
-            if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:\'"\\|,.<>\/?]/', $_POST['us_contrasenia'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'La contraseña debe contener al menos un carácter especial'
-                ]);
+            if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['us_contrasenia'])) {
+                self::error('La contraseña solo debe contener números y letras');
                 return;
             }
-
-            // Validar confirmación de contraseña
             if ($_POST['us_contrasenia'] !== $_POST['us_confirmar_contra']) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Las contraseñas no coinciden'
-                ]);
+                self::error('Las contraseñas no coinciden');
                 return;
             }
 
-            // Verificar si ya existe usuario con ese DPI
             $usuarioExistenteDpi = Usuarios::where('us_dpi', $_POST['us_dpi']);
             if (!empty($usuarioExistenteDpi)) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Ya existe un usuario registrado con este DPI'
-                ]);
+                self::error('Ya existe un usuario registrado con este DPI');
                 return;
             }
 
-            // Verificar si ya existe usuario con ese correo
             $usuarioExistenteCorreo = Usuarios::where('us_correo', $_POST['us_correo']);
             if (!empty($usuarioExistenteCorreo)) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Ya existe un usuario registrado con este correo electrónico'
-                ]);
+                self::error('Ya existe un usuario registrado con este correo electrónico');
                 return;
             }
 
-            // Procesar fotografía
-            $nombreFotografia = '';
-            try {
-                $nombreFotografia = self::procesarFotografia();
-            } catch (Exception $e) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => $e->getMessage()
-                ]);
-                return;
-            }
+            $nombreFotografia = self::procesarFotografia();
+            $contrasenaHasheada = password_hash($_POST['us_contrasenia'], PASSWORD_DEFAULT);
+            $tokenGenerado = bin2hex(random_bytes(32));
 
-            // Crear usuario
             $usuario = new Usuarios([
                 'us_nombres' => ucwords(strtolower(trim(htmlspecialchars($_POST['us_nombres'])))),
                 'us_apellidos' => ucwords(strtolower(trim(htmlspecialchars($_POST['us_apellidos'])))),
@@ -189,9 +102,8 @@ class RegistroController extends ActiveRecord
                 'us_dpi' => filter_var($_POST['us_dpi'], FILTER_SANITIZE_NUMBER_INT),
                 'us_correo' => filter_var($_POST['us_correo'], FILTER_SANITIZE_EMAIL),
                 'us_rol' => filter_var($_POST['us_rol'], FILTER_SANITIZE_NUMBER_INT),
-                'us_contrasenia' => password_hash($_POST['us_contrasenia'], PASSWORD_DEFAULT),
-                'us_confirmar_contra' => password_hash($_POST['us_contrasenia'], PASSWORD_DEFAULT),
-                'us_token' => bin2hex(random_bytes(32)),
+                'us_contrasenia' => $contrasenaHasheada,
+                'us_token' => $tokenGenerado,
                 'us_fecha_creacion' => date('Y-m-d H:i'),
                 'us_fecha_contrasenia' => date('Y-m-d H:i'),
                 'us_foto' => $nombreFotografia,
@@ -208,53 +120,36 @@ class RegistroController extends ActiveRecord
                     'usuario_id' => $resultado['id']
                 ]);
             } else {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Error al registrar el usuario'
-                ]);
+                self::error('Error al registrar el usuario');
             }
-
         } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'codigo' => 0,
-                'mensaje' => 'Error al guardar el usuario',
-                'detalle' => $e->getMessage(),
-            ]);
+            self::internalError('Error al guardar el usuario', $e);
         }
     }
 
-   public static function buscarAPI()
-{
-    try {
-        $usuarios = Usuarios::obtenerUsuariosConRol();
-        
-        // Procesar cada usuario para preparar la foto base64
-        foreach ($usuarios as &$usuario) {
-            if (!empty($usuario['us_foto'])) {
-                // La foto ya está en base64, solo agregar el prefijo data:image
-                $usuario['foto_url'] = 'data:image/jpeg;base64,' . $usuario['us_foto'];
-            } else {
-                $usuario['foto_url'] = null;
+    public static function buscarAPI()
+    {
+        try {
+            $usuarios = Usuarios::obtenerUsuariosConRol();
+
+            foreach ($usuarios as &$usuario) {
+                if (!empty($usuario['us_foto']) && is_string($usuario['us_foto'])) {
+                    $usuario['foto_url'] = 'data:image/jpeg;base64,' . $usuario['us_foto'];
+                } else {
+                    $usuario['foto_url'] = null;
+                }
             }
-        }
 
-        http_response_code(200);
-        echo json_encode([
-            'codigo' => 1,
-            'mensaje' => 'Usuarios obtenidos satisfactoriamente',
-            'data' => $usuarios
-        ]);
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode([
-            'codigo' => 0,
-            'mensaje' => 'Error al obtener los usuarios',
-            'detalle' => $e->getMessage(),
-        ]);
+            http_response_code(200);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Usuarios obtenidos satisfactoriamente',
+                'data' => $usuarios
+            ]);
+        } catch (Exception $e) {
+            self::internalError('Error al obtener los usuarios', $e);
+        }
     }
-}
 
     public static function modificarAPI()
     {
@@ -262,38 +157,33 @@ class RegistroController extends ActiveRecord
 
         try {
             $usuario_id = $_POST['us_id'];
-
             if (empty($usuario_id)) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'ID de usuario requerido'
-                ]);
+                self::error('ID de usuario requerido');
                 return;
             }
 
             if (empty($_POST['us_nombres']) || empty($_POST['us_apellidos'])) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Nombres y apellidos son obligatorios'
-                ]);
+                self::error('Nombres y apellidos son obligatorios');
                 return;
             }
 
+            // Buscamos el usuario actual
             $usuario = Usuarios::find($usuario_id);
             if (!$usuario) {
-                http_response_code(404);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Usuario no encontrado'
-                ]);
+                self::error('Usuario no encontrado');
                 return;
             }
 
-            // Sincronizar datos
-            $usuario->sincronizar($_POST);
+            // Procesar la fotografía solo si viene nueva
+            $nuevaFoto = self::procesarFotografia();
+            if (!empty($nuevaFoto)) {
+                $_POST['us_foto'] = $nuevaFoto;
+            } else {
+                $_POST['us_foto'] = $usuario['us_foto']; // Conserva la foto anterior si no se envía nueva
+            }
 
+            // Sincronizamos todos los datos normales
+            $usuario->sincronizar($_POST);
             $resultado = $usuario->guardar();
 
             if ($resultado['resultado']) {
@@ -303,20 +193,10 @@ class RegistroController extends ActiveRecord
                     'mensaje' => 'Usuario modificado exitosamente'
                 ]);
             } else {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Error al modificar usuario'
-                ]);
+                self::error('Error al modificar usuario');
             }
-
         } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'codigo' => 0,
-                'mensaje' => 'Error al modificar el usuario',
-                'detalle' => $e->getMessage(),
-            ]);
+            self::internalError('Error al modificar el usuario', $e);
         }
     }
 
@@ -324,13 +204,8 @@ class RegistroController extends ActiveRecord
     {
         try {
             $usuario_id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-
             if (!$usuario_id) {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'ID de usuario inválido'
-                ]);
+                self::error('ID de usuario inválido');
                 return;
             }
 
@@ -343,76 +218,70 @@ class RegistroController extends ActiveRecord
                     'mensaje' => 'Usuario eliminado exitosamente'
                 ]);
             } else {
-                http_response_code(400);
-                echo json_encode([
-                    'codigo' => 0,
-                    'mensaje' => 'Error al eliminar usuario'
-                ]);
+                self::error('Error al eliminar usuario');
             }
-
         } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'codigo' => 0,
-                'mensaje' => 'Error al eliminar el usuario',
-                'detalle' => $e->getMessage(),
-            ]);
+            self::internalError('Error al eliminar el usuario', $e);
         }
     }
 
     private static function procesarFotografia()
     {
-        // Si no hay archivo, retornar vacío
-        if (!isset($_FILES['us_fotografia']) || $_FILES['us_fotografia']['error'] === UPLOAD_ERR_NO_FILE) {
+        if (!isset($_FILES['us_foto']) || $_FILES['us_foto']['error'] === UPLOAD_ERR_NO_FILE) {
             return '';
         }
 
-        $archivo = $_FILES['us_fotografia'];
-
-        // Validar errores de subida
+        $archivo = $_FILES['us_foto'];
         if ($archivo['error'] !== UPLOAD_ERR_OK) {
             throw new Exception('Error al subir el archivo: ' . $archivo['error']);
         }
 
-        // Validar tamaño (máximo 2MB)
-        $tamañoMaximo = 2 * 1024 * 1024; // 2MB en bytes
+        $tamañoMaximo = 2 * 1024 * 1024;
         if ($archivo['size'] > $tamañoMaximo) {
             throw new Exception('El archivo es muy grande. Máximo permitido: 2MB');
         }
 
-        // Validar tipo de archivo
         $tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png'];
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $tipoMime = finfo_file($finfo, $archivo['tmp_name']);
         finfo_close($finfo);
 
         if (!in_array($tipoMime, $tiposPermitidos)) {
-            throw new Exception('Tipo de archivo no permitido. Solo se permiten: JPG, JPEG, PNG');
+            throw new Exception('Tipo de archivo no permitido. Solo JPG, JPEG, PNG');
         }
 
-        // Usar directorio existente fotosUsuarios
         $directorioDestino = __DIR__ . '/../storage/fotosUsuarios/';
-
-        // Verificar que el directorio existe, si no, crearlo
         if (!is_dir($directorioDestino)) {
             if (!mkdir($directorioDestino, 0755, true)) {
                 throw new Exception('No se pudo crear el directorio de fotografías');
             }
         }
 
-        // Generar nombre único para el archivo
         $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
         $nombreArchivo = 'usuario_' . uniqid() . '_' . time() . '.' . $extension;
         $rutaCompleta = $directorioDestino . $nombreArchivo;
 
-        // Mover archivo al directorio de destino
         if (!move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
             throw new Exception('Error al guardar el archivo en el servidor');
         }
 
-        // Convertir a base64 para guardar en la BD según tu estructura
         $fotoBase64 = base64_encode(file_get_contents($rutaCompleta));
-
         return $fotoBase64;
+    }
+
+    private static function error($mensaje)
+    {
+        http_response_code(400);
+        echo json_encode(['codigo' => 0, 'mensaje' => $mensaje]);
+    }
+
+    private static function internalError($mensaje, $e)
+    {
+        http_response_code(500);
+        echo json_encode([
+            'codigo' => 0,
+            'mensaje' => $mensaje,
+            'detalle' => $e->getMessage()
+        ]);
     }
 }
