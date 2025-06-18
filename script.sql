@@ -8,7 +8,6 @@ create table usuarios(
     us_direccion varchar(250),
     us_dpi varchar(13),
     us_correo varchar(100),
-    us_rol integer,
     us_contrasenia lvarchar(1056),
     us_confirmar_contra lvarchar(1056),
     us_token lvarchar,
@@ -18,17 +17,28 @@ create table usuarios(
     us_situacion char(1)
 );
 
-alter table usuarios add constraint (foreign key(us_rol)
-references rol(rol_id) constraint fk_us_rol)
 
 
-
-create table rol (
-    rol_id serial primary key,
-    rol_nombre varchar(75),
-    rol_nombre_ct varchar(25),
-    rol_situacion char(1)
+create table asig_permisos(
+asig_id serial primary key,
+asig_usuario integer not null,
+asig_aplicacion integer not null,
+asig_permisos integer not null,
+asig_fecha datetime year to minute default current year to minute,
+asig_quitar_fechaPermiso datetime year to minute default current year to minute,
+asig_usuario_asignador integer not null,
+asig_motivo varchar(250),
+asig_situacion char(1)
 );
+
+alter table asig_permisos add constraint (foreign key(asig_usuario)
+references usuarios(us_id) constraint fk_asig_us)
+
+alter table asig_permisos add constraint (foreign key(asig_aplicacion)
+references aplicacion(ap_id) constraint fk_asig_ap)
+
+alter table asig_permisos add constraint (foreign key(asig_permisos)
+references permisos(per_id) constraint fk_asig_per)
 
 
 

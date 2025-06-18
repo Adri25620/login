@@ -56,17 +56,6 @@
                                 <label for="us_direccion" class="form-label">Direccion</label>
                                 <input type="text" class="form-control" id="us_direccion" name="us_direccion" placeholder="Ingrese su dirección">
                             </div>
-                            <div class="col-lg-4">
-                                <label for="us_rol" class="form-label">Seleccione el rol:</label>
-                                <select name="us_rol" id="us_rol" class="form-select" required>
-                                    <option value="" selected disabled>Seleccione un rol...</option>
-                                    <?php foreach ($roles as $rol): ?>
-                                        <?php if ($rol->rol_situacion == 1): ?>
-                                            <option value="<?= $rol->rol_id ?>"><?= $rol->rol_nombre ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
                             <div class="col-lg-4" id="grupo_foto">
                                 <label for="us_foto" class="form-label">Fotografía</label>
                                 <input type="file" class="form-control form-control-lg" id="us_foto" name="us_foto" accept="image/*">

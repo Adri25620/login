@@ -50,15 +50,6 @@ $router->post('/permiso/guardarAPI', [PermisoController::class, 'guardarAPI']);
 
 
 
-//url's registrar roles
-$router->get('/rol', [RolController::class, 'index']);
-$router->post('/rol/modificarAPI', [RolController::class, 'modificarAPI']);
-$router->get('/rol/buscarAPI', [RolController::class, 'buscarAPI']);
-$router->get('/rol/eliminarAPI', [RolController::class, 'eliminarAPI']);
-$router->post('/rol/guardarAPI', [RolController::class, 'guardarAPI']);
-
-
-
 //url's registrar marcas celulares
 $router->get('/marcas', [MarcaCelController::class, 'index']);
 $router->post('/marcas/modificarAPI', [MarcaCelController::class, 'modificarAPI']);

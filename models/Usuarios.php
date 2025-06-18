@@ -14,7 +14,6 @@ class Usuarios extends ActiveRecord
         'us_direccion',
         'us_dpi',
         'us_correo',
-        'us_rol',
         'us_contrasenia',
         'us_confirmar_contra',
         'us_token',
@@ -32,7 +31,6 @@ class Usuarios extends ActiveRecord
     public $us_direccion;
     public $us_dpi;
     public $us_correo;
-    public $us_rol;
     public $us_contrasenia;
     public $us_confirmar_contra;
     public $us_token;
@@ -51,7 +49,6 @@ class Usuarios extends ActiveRecord
         $this->us_direccion = $args['us_direccion'] ?? '';
         $this->us_dpi = $args['us_dpi'] ?? '';
         $this->us_correo = $args['us_correo'] ?? '';
-        $this->us_rol = $args['us_rol'] ?? '';
         $this->us_contrasenia = $args['us_contrasenia'] ?? '';
         $this->us_confirmar_contra = $args['us_confirmar_contra'] ?? '';
         $this->us_token = $args['us_token'] ?? '';
@@ -67,26 +64,22 @@ class Usuarios extends ActiveRecord
         return self::SQL($sql);
     }
 
-
-    public static function obtenerUsuariosConRol()
-{
-    $sql = "SELECT 
-            u.us_id,
-            u.us_nombres,
-            u.us_apellidos,
-            u.us_telefono,
-            u.us_direccion,
-            u.us_dpi,
-            u.us_correo,
-            u.us_foto, 
-            u.us_rol,
-            r.rol_nombre
-          FROM usuarios u
-          INNER JOIN rol r ON u.us_rol = r.rol_id
-          WHERE u.us_situacion = 1
-          ORDER BY u.us_id DESC";
-    
-    return self::fetchArray($sql);
-}
-
+    public static function obtenerUsuarios()
+    {
+        $sql = "SELECT 
+                u.us_id,
+                u.us_nombres,
+                u.us_apellidos,
+                u.us_telefono,
+                u.us_direccion,
+                u.us_dpi,
+                u.us_correo,
+                u.us_foto
+              FROM usuarios u
+              WHERE u.us_situacion = 1
+              ORDER BY u.us_id DESC";
+        
+        $resultado = self::fetchArray($sql);
+        return $resultado ?: [];
+    }
 }

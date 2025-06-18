@@ -260,7 +260,7 @@ class PermisoController extends ActiveRecord
         }
     }
 
-    public static function EliminarAPI()
+    public static function eliminarAPI()
     {
         try {
             $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);

@@ -9,7 +9,6 @@ module.exports = {
     'js/registro/index' : './src/js/registro/index.js',
     'js/aplicaciones/index' : './src/js/aplicaciones/index.js',
     'js/permisos/index' : './src/js/permisos/index.js',
-    'js/roles/index' : './src/js/roles/index.js',
     'js/marcas/index' : './src/js/marcas/index.js',
     'js/clientes/index' : './src/js/clientes/index.js',
     'js/bienvenida/index' : './src/js/bienvenida/index.js',
