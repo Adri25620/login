@@ -60,12 +60,10 @@ class Asignacion extends ActiveRecord
                 a.asig_quitar_fechaPermiso,
                 a.asig_usuario_asignador,
                 a.asig_motivo,
-                u.us_nombres,
-                u.us_apellidos,
-                ap.ap_nombre,
-                p.per_nombre_permiso,
-                ua.us_nombres as asignador_nombres,
-                ua.us_apellidos as asignador_apellidos
+                u.us_nombres || ' ' || u.us_apellidos as usuario_nombre,
+                ap.ap_nombre_lg as aplicacion_nombre,
+                p.per_nombre_permiso as permiso_nombre,
+                ua.us_nombres || ' ' || ua.us_apellidos as asignador_nombre
               FROM asig_permisos a
               INNER JOIN usuarios u ON a.asig_usuario = u.us_id
               INNER JOIN aplicacion ap ON a.asig_aplicacion = ap.ap_id

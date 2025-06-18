@@ -42,13 +42,14 @@ $router->post('/aplicacion/guardarAPI', [AplicacionController::class, 'guardarAP
 
 
 
-//url's registrar permisos
+//url's registrar asignaciones
 $router->get('/asignacion', [AsignacionController::class, 'index']);
-$router->post('/asignacion/modificarAPI', [AsignacionController::class, 'modificarAPI']);
+$router->post('/asignacion/guardarAPI', [AsignacionController::class, 'guardarAPI']);
 $router->get('/asignacion/buscarAPI', [AsignacionController::class, 'buscarAPI']);
+$router->post('/asignacion/modificarAPI', [AsignacionController::class, 'modificarAPI']);
 $router->get('/asignacion/eliminarAPI', [AsignacionController::class, 'eliminarAPI']);
 $router->get('/asignacion/finPermisoAPI', [AsignacionController::class, 'finPermisoAPI']);
-$router->post('/asignacion/guardarAPI', [AsignacionController::class, 'guardarAPI']);
+$router->get('/asignacion/obtenerPermisosPorAplicacionAPI', [AsignacionController::class, 'obtenerPermisosPorAplicacionAPI']);
 
 
 

@@ -19,7 +19,7 @@ class AsignacionController extends ActiveRecord
         $aplicaciones = Aplicacion::all();
         $permisos = Permisos::all();
         
-        $router->render('asignaciones/index', [
+        $router->render('asignacion/index', [
             'usuarios' => $usuarios,
             'aplicaciones' => $aplicaciones,
             'permisos' => $permisos
@@ -280,7 +280,40 @@ class AsignacionController extends ActiveRecord
         }
     }
 
-    public static function quitarPermisoAPI()
+    public static function obtenerPermisosPorAplicacionAPI()
+    {
+        try {
+            $aplicacion_id = filter_var($_GET['aplicacion_id'], FILTER_SANITIZE_NUMBER_INT);
+
+            if (!$aplicacion_id) {
+                http_response_code(400);
+                echo json_encode([
+                    'codigo' => 0,
+                    'mensaje' => 'ID de aplicación requerido'
+                ]);
+                return;
+            }
+
+            $permisos = Permisos::obtenerPermisosPorAplicacion($aplicacion_id);
+
+            http_response_code(200);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Permisos obtenidos correctamente',
+                'data' => $permisos
+            ]);
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode([
+                'codigo' => 0,
+                'mensaje' => 'Error al obtener permisos',
+                'detalle' => $e->getMessage(),
+            ]);
+        }
+    }
+
+
+    public static function finPermisoAPI()
     {
         try {
             $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
@@ -292,13 +325,13 @@ class AsignacionController extends ActiveRecord
             http_response_code(200);
             echo json_encode([
                 'codigo' => 1,
-                'mensaje' => 'Permiso quitado correctamente'
+                'mensaje' => 'Permiso finalizado correctamente'
             ]);
         } catch (Exception $e) {
             http_response_code(400);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al quitar permiso',
+                'mensaje' => 'Error al finalizar permiso',
                 'detalle' => $e->getMessage(),
             ]);
         }

@@ -29,7 +29,7 @@ const ValidarUsuario = () => {
 }
 
 // Función para habilitar/deshabilitar permisos según aplicación
-const ValidarAplicacion = () => {
+const ValidarAplicacion = async () => {
     if (asig_aplicacion.value.trim() === '') {
         asig_aplicacion.classList.remove('is-valid');
         asig_aplicacion.classList.add('is-invalid');
@@ -37,13 +37,68 @@ const ValidarAplicacion = () => {
         asig_permisos.disabled = true;
         asig_permisos.value = '';
         asig_permisos.classList.remove('is-valid', 'is-invalid');
+        // Limpiar opciones de permisos
+        asig_permisos.innerHTML = '<option value="" selected disabled>Primero seleccione una aplicación...</option>';
         return false;
     } else {
         asig_aplicacion.classList.remove('is-invalid');
         asig_aplicacion.classList.add('is-valid');
-        // Habilitar permisos
-        asig_permisos.disabled = false;
+        // Cargar permisos de la aplicación seleccionada
+        await cargarPermisosPorAplicacion(asig_aplicacion.value);
         return true;
+    }
+}
+
+// Nueva función para cargar permisos por aplicación
+const cargarPermisosPorAplicacion = async (aplicacionId) => {
+    try {
+        // Mostrar loading en el select de permisos
+        asig_permisos.innerHTML = '<option value="" selected disabled>Cargando permisos...</option>';
+        asig_permisos.disabled = true;
+
+        const url = `/proyecto_uno/asignacion/obtenerPermisosPorAplicacionAPI?aplicacion_id=${aplicacionId}`;
+        const config = { method: 'GET' };
+        
+        const respuesta = await fetch(url, config);
+        const datos = await respuesta.json();
+        const { codigo, mensaje, data } = datos;
+        
+        if (codigo == 1) {
+            // Limpiar select de permisos
+            asig_permisos.innerHTML = '<option value="" selected disabled>Seleccione un permiso...</option>';
+            
+            // Agregar permisos de la aplicación
+            if (data && data.length > 0) {
+                data.forEach(permiso => {
+                    const option = document.createElement('option');
+                    option.value = permiso.per_id;
+                    option.textContent = permiso.per_nombre_permiso;
+                    asig_permisos.appendChild(option);
+                });
+                asig_permisos.disabled = false;
+            } else {
+                asig_permisos.innerHTML = '<option value="" selected disabled>No hay permisos disponibles para esta aplicación</option>';
+            }
+        } else {
+            asig_permisos.innerHTML = '<option value="" selected disabled>Error al cargar permisos</option>';
+            await Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Error",
+                text: mensaje,
+                showConfirmButton: true,
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        asig_permisos.innerHTML = '<option value="" selected disabled>Error al cargar permisos</option>';
+        await Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Error de conexión",
+            text: "No se pudo cargar los permisos",
+            showConfirmButton: true,
+        });
     }
 }
 
@@ -125,7 +180,6 @@ const datatable = new DataTable('#TableAsignaciones', {
         { title: 'Usuario', data: 'usuario_nombre' },
         { title: 'Aplicación', data: 'aplicacion_nombre' },
         { title: 'Permiso', data: 'permiso_nombre' },
-        { title: 'Asignador', data: 'asignador_nombre' },
         { title: 'Motivo', data: 'asig_motivo' },
         { title: 'Fecha Asignación', data: 'asig_fecha' },
         {
@@ -182,8 +236,9 @@ const limpiarTodo = () => {
     FormAsignaciones.querySelectorAll('.form-control, .form-select').forEach(element => {
         element.classList.remove('is-valid', 'is-invalid');
     });
-    // Deshabilitar permisos al limpiar
+    // Deshabilitar permisos al limpiar y restaurar opciones originales
     asig_permisos.disabled = true;
+    asig_permisos.innerHTML = '<option value="" selected disabled>Primero seleccione una aplicación...</option>';
 }
 
 const BuscarAsignaciones = async (mostrarMensaje = false) => {
@@ -344,12 +399,17 @@ const ModificarAsignacion = async (event) => {
     BtnModificar.disabled = false;
 }
 
-const llenarFormulario = (event) => {
+const llenarFormulario = async (event) => {
     const datos = event.currentTarget.dataset;
     
     document.getElementById('asig_id').value = datos.id;
     document.getElementById('asig_usuario').value = datos.usuario;
     document.getElementById('asig_aplicacion').value = datos.aplicacion;
+    
+    // Cargar permisos de la aplicación antes de seleccionar el permiso
+    await cargarPermisosPorAplicacion(datos.aplicacion);
+    
+    // Ahora seleccionar el permiso específico
     document.getElementById('asig_permisos').value = datos.permisos;
     document.getElementById('asig_usuario_asignador').value = datos.asignador;
     document.getElementById('asig_motivo').value = datos.motivo;
