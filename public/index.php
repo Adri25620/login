@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 use Controllers\AplicacionController;
 use MVC\Router;
 use Controllers\AppController;
+use Controllers\AsignacionController;
 use Controllers\ClienteController;
 use Controllers\LoginController;
 use Controllers\MarcaCelController;
@@ -42,11 +43,22 @@ $router->post('/aplicacion/guardarAPI', [AplicacionController::class, 'guardarAP
 
 
 //url's registrar permisos
+$router->get('/asignacion', [AsignacionController::class, 'index']);
+$router->post('/asignacion/modificarAPI', [AsignacionController::class, 'modificarAPI']);
+$router->get('/asignacion/buscarAPI', [AsignacionController::class, 'buscarAPI']);
+$router->get('/asignacion/eliminarAPI', [AsignacionController::class, 'eliminarAPI']);
+$router->get('/asignacion/finPermisoAPI', [AsignacionController::class, 'finPermisoAPI']);
+$router->post('/asignacion/guardarAPI', [AsignacionController::class, 'guardarAPI']);
+
+
+
+//url's registrar permiso
 $router->get('/permiso', [PermisoController::class, 'index']);
 $router->post('/permiso/modificarAPI', [PermisoController::class, 'modificarAPI']);
 $router->get('/permiso/buscarAPI', [PermisoController::class, 'buscarAPI']);
 $router->get('/permiso/eliminarAPI', [PermisoController::class, 'eliminarAPI']);
 $router->post('/permiso/guardarAPI', [PermisoController::class, 'guardarAPI']);
+
 
 
 
