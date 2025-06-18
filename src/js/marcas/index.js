@@ -69,19 +69,24 @@ const GuardarMarca = async (event) => {
             await Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Exito",
+                title: "¡Marca guardada exitosamente!",
                 text: mensaje,
-                showConfirmButton: true,
+                showConfirmButton: false,
+                timer: 2000
             });
 
             limpiarTodo();
+            
+            if (SeccionTabla.style.display !== 'none') {
+                await BuscarMarcas(false);
+            }
 
         } else {
 
             await Swal.fire({
                 position: "center",
-                icon: "info",
-                title: "Error",
+                icon: "error",
+                title: "Error al guardar",
                 text: mensaje,
                 showConfirmButton: true,
             });
@@ -89,7 +94,14 @@ const GuardarMarca = async (event) => {
         }
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        await Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Error de conexión",
+            text: "No se pudo conectar con el servidor",
+            showConfirmButton: true,
+        });
     }
     BtnGuardar.disabled = false;
 
@@ -105,17 +117,16 @@ const BuscarMarcas = async (mostrarMensaje = false) => {
         const respuesta = await fetch(url, config);
         const datos = await respuesta.json();
 
-        // Tu API devuelve directamente el array, no tiene estructura {codigo, mensaje, data}
         if (Array.isArray(datos)) {
             
             if (mostrarMensaje) {
                 await Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Exito",
+                    title: "¡Marcas cargadas!",
                     text: `Se cargaron ${datos.length} marca(s) correctamente`,
-                    showConfirmButton: true,
-                    timer: 2000
+                    showConfirmButton: false,
+                    timer: 1500
                 });
             }
 
@@ -127,7 +138,7 @@ const BuscarMarcas = async (mostrarMensaje = false) => {
             if (mostrarMensaje) {
                 await Swal.fire({
                     position: "center",
-                    icon: "info",
+                    icon: "error",
                     title: "Error",
                     text: "No se pudieron cargar las marcas",
                     showConfirmButton: true,
@@ -251,20 +262,24 @@ const ModificarMarca = async (event) => {
             await Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Exito",
+                title: "¡Marca modificada exitosamente!",
                 text: mensaje,
-                showConfirmButton: true,
+                showConfirmButton: false,
+                timer: 2000
             });
 
             limpiarTodo();
-            BuscarMarcas(true);
+            
+            if (SeccionTabla.style.display !== 'none') {
+                await BuscarMarcas(false);
+            }
 
         } else {
 
             await Swal.fire({
                 position: "center",
-                icon: "info",
-                title: "Error",
+                icon: "error",
+                title: "Error al modificar",
                 text: mensaje,
                 showConfirmButton: true,
             });
@@ -272,7 +287,14 @@ const ModificarMarca = async (event) => {
         }
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        await Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Error de conexión",
+            text: "No se pudo conectar con el servidor",
+            showConfirmButton: true,
+        });
     }
     BtnModificar.disabled = false;
 
@@ -284,12 +306,12 @@ const EliminarMarcas = async (e) => {
 
     const AlertaConfirmarEliminar = await Swal.fire({
         position: "center",
-        icon: "info",
+        icon: "warning",
         title: "¿Desea ejecutar esta acción?",
         text: 'Esta completamente seguro que desea eliminar este registro',
         showConfirmButton: true,
         confirmButtonText: 'Si, Eliminar',
-        confirmButtonColor: 'red',
+        confirmButtonColor: '#d33',
         cancelButtonText: 'No, Cancelar',
         showCancelButton: true
     });
@@ -312,12 +334,12 @@ const EliminarMarcas = async (e) => {
                 await Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Exito",
+                    title: "Éxito",
                     text: mensaje,
                     showConfirmButton: true,
                 });
                 
-                BuscarMarcas(true);
+                await BuscarMarcas(false);
             } else {
                 await Swal.fire({
                     position: "center",
@@ -329,7 +351,14 @@ const EliminarMarcas = async (e) => {
             }
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            await Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Error de conexión",
+                text: "No se pudo conectar con el servidor",
+                showConfirmButton: true,
+            });
         }
 
     }

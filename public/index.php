@@ -10,7 +10,7 @@ use Controllers\LoginController;
 use Controllers\MarcaCelController;
 use Controllers\PermisoController;
 use Controllers\RegistroController;
-use Controllers\RolController;
+use Controllers\InventarioController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -72,12 +72,27 @@ $router->post('/marcas/guardarAPI', [MarcaCelController::class, 'guardarAPI']);
 
 
 
-//url's registrar clientes clientes
+//url's registrar clientes
 $router->get('/clientes', [ClienteController::class, 'index']);
 $router->post('/clientes/modificarAPI', [ClienteController::class, 'modificarAPI']);
 $router->get('/clientes/buscarAPI', [ClienteController::class, 'buscarAPI']);
 $router->get('/clientes/eliminarAPI', [ClienteController::class, 'eliminarAPI']);
 $router->post('/clientes/guardarAPI', [ClienteController::class, 'guardarAPI']);
+
+
+
+// urls's inventario
+$router->get('/inventario', [InventarioController::class, 'index']);
+$router->post('/inventario/guardarAPI', [InventarioController::class, 'guardarAPI']);
+$router->get('/inventario/buscarAPI', [InventarioController::class, 'buscarAPI']);
+$router->post('/inventario/modificarAPI', [InventarioController::class, 'modificarAPI']);
+$router->get('/inventario/eliminarAPI', [InventarioController::class, 'eliminarAPI']);
+// stock inventario
+$router->get('/inventario/obtenerDisponibleAPI', [InventarioController::class, 'obtenerDisponibleAPI']);
+$router->get('/inventario/obtenerAgotadoAPI', [InventarioController::class, 'obtenerAgotadoAPI']);
+$router->get('/inventario/obtenerBajoStockAPI', [InventarioController::class, 'obtenerBajoStockAPI']);
+$router->post('/inventario/actualizarStockAPI', [InventarioController::class, 'actualizarStockAPI']);
+$router->get('/inventario/obtenerEstadisticasAPI', [InventarioController::class, 'obtenerEstadisticasAPI']);
 
 
 
